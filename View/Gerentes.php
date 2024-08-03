@@ -56,8 +56,6 @@ $dadosprodutos = DaoEstoque::dadosProdutos($dominio);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerentes</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/Funcionario.css">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="../css/funcionario.plataform.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -117,6 +115,18 @@ $dadosprodutos = DaoEstoque::dadosProdutos($dominio);
                     </div>
                 </div>
             </nav>
+            <div class="container-fluid totalFuncionarios">
+                <?php      
+        if(!empty($dominio)) {
+            $totalFuncionarios = DaoGerentes::ContFuncionario($dominio);
+            echo "<h5>TOTAL FUNCIONARIOS: " . $totalFuncionarios . "</h5>";
+            echo "<a class=\"btn btn-suc\" href=\"CadFuncionarios.php\">Cadastre seus funcionarios</a>";
+            } 
+        } else {
+            echo "Login inválido";
+        } 
+                ?>
+            </div>
             <div class="container-fluid produtos">
 
                 <?php if ($quantlinhas && is_array($dadosprodutos)) :
@@ -150,19 +160,6 @@ $dadosprodutos = DaoEstoque::dadosProdutos($dominio);
 
             </div>
         </div>
-
-    <?php
-
-        if(!empty($dominio)) {
-        $totalFuncionarios = DaoGerentes::ContFuncionario($dominio);
-        echo "<h3>TOTAL FUNCIONARIOS: " . $totalFuncionarios . "</h3>";
-        echo "<a class=\"button-3 \" href=\"CadFuncionarios.php\">Cadastre seus funcionarios</a>";
-        } 
-    } else {
-        echo "Login inválido";
-    } 
-
-    ?> 
 </body>
 
 </html>
