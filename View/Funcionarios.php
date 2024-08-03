@@ -108,7 +108,7 @@ $dadosprodutos = DaoEstoque::dadosProdutos($dominio);
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Funcionário</a></li>
-                                    <li><a class="dropdown-item" href="LogGerentes.php">Gerente</a></li>
+                                    <li><a class="dropdown-item" href="LogGerentes.html">Gerente</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -162,7 +162,7 @@ $dadosprodutos = DaoEstoque::dadosProdutos($dominio);
     } else {
         echo '<div style="margin-left: auto;margin-right: auto; margin-top:10%; width: 14%;">
              <h1>Login inválido</h1>
-             <a class="btn btn-warning" style="text-decoration:none; color:black;" href="LogFuncionarios.php">Voltar ao login</a>
+             <a class="btn btn-warning" style="text-decoration:none; color:black;" href="LogFuncionarios.html">Voltar ao login</a>
          </div>';
     }
     ?>

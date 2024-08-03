@@ -3,13 +3,12 @@ require_once("../Controller/DaoEmpresas.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dominio = $_POST['dominio'];
-    $nomeEmpresa = $_POST['NomeEmpresa'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
+    $senha = $_POST['senha'];
 
-    $message = DaoEmpresas::inserir($dominio, $nomeEmpresa, $email, $telefone);
+   /*  $message = DaoEmpresas::inserir($dominio, $nomeEmpresa, $senha,$email, $telefone); */
 }
-    $resultados = DaoEmpresas::listar($dominio);
+    $resultados = DaoEmpresas::listar($dominio, $senha);
+    $quantGerentes = DaoEmpresas::ContGerentes($dominio);
 
 ?>
 
@@ -18,34 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Empresas</title>
 </head>
 <body>
 
+                    <h3>Quantidade de Gerentes: <?= $quantGerentes ?></h3>
 
-    <H1>EMPRESA CRIADA</H1>
-        <table>
-            <tr>
-                <td>
-                    <h3>Dominio: <?= $dominio ?> </h3>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3>Nome da Empresa: <?= $nomeEmpresa ?> </h3>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3>Email: <?= $email ?> </h3>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3>Senha: <?= $telefone?> </h3>
-                </td>
-            </tr>
-        </table>
 
 </body>
 </html>

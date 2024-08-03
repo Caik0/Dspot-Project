@@ -1,11 +1,12 @@
 create database dspot;
-
 use dspot;
+
 
 create table Empresa(
 idEmpresa int primary key auto_increment,
 dominio char(10) not null,
 nomeEmpresa varchar(80) not null,
+senhaEmpresa varchar(255) not null,
 emailEmpresa varchar(200) not null,
 telefoneEmpresa varchar(14)
 )engine=InnoDB;
@@ -52,11 +53,11 @@ foreign key(fk_idEmpresa) references empresa(idEmpresa) on delete restrict on up
 -- colunas: id, nomeProduto, detalhes, quantidadeAtual, dataEntrada, dataUltimaModificacao, perecivel = bool, dataValidade, precoCompra
 -- precoVenda, fornecedor, quantidadeTotal, idEmpresa=fk
 
-insert into Empresa(dominio, nomeEmpresa, emailEmpresa, telefoneEmpresa)
-values('12345-1*23', 'empresa',"empresa1@gmail.com",  "(81) 3897-8248");
+insert into Empresa(dominio, nomeEmpresa, senhaEmpresa, emailEmpresa, telefoneEmpresa)
+values('12345-1*23', 'empresa', 'primeiraempresa',"empresa1@gmail.com",  "(81) 3897-8248");
 
-insert into Empresa(dominio, nomeEmpresa, emailEmpresa, telefoneEmpresa)
-values('23456-1*23', 'segunda-empresa', "empresa2@gmail.com", "(79) 3862-5632");
+insert into Empresa(dominio, nomeEmpresa, senhaEmpresa, emailEmpresa, telefoneEmpresa)
+values('23456-1*23', 'segunda-empresa', 'segundaempresa', "empresa2@gmail.com", "(79) 3862-5632");
 
 insert into Gerente(fk_idEmpresa, nomeGerente, senhaGerente, emailGerente) 
 values(1, "Ronaldo", "ronaldo123","ronaldo@gmail.com");
@@ -254,10 +255,26 @@ END$
 
 delimiter ;
 
+delimiter $
+
+create procedure contGerentes
+(
+in dominioEmpresa char(10),
+out quantTotal int
+)
+BEGIN
+  select count(idGerente) INTO quantTotal
+    from gerente
+    inner join empresa on gerente.fk_idEmpresa = empresa.idempresa
+    WHERE empresa.dominio = dominioEmpresa;
+END$
+delimiter ;
 
 
-
+-- drop procedure contGerentes;
 -- drop procedure contFuncionarios;
+-- call contGerentes('12345-1*23' ,@quantTotal);
+-- select @quanttotal;
 -- call contFuncionarios('12345-1*23', @quantidadeTotal);
 -- select @quantidadeTotal;
 -- select * from gerente;
